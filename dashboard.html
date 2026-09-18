@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MRJOO | لوحة التحكم الإدارية الكاملة</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body class="dashboard-body">
+    <div class="dashboard-container">
+        <!-- القائمة الجانبية -->
+        <aside class="sidebar">
+            <h2>MRJOO Admin</h2>
+            <ul>
+                <li><a href="index.html">🏠 العودة للعبة (الرئيسية)</a></li>
+                <li><a href="#lights" class="active">💡 إعدادات الإضاءة</a></li>
+                <li><a href="#game-settings">⚙️ إعدادات التحدي</a></li>
+                <li><a href="#supporters-manage">👑 إدارة التوب داعمين</a></li>
+            </ul>
+        </aside>
+
+        <!-- محتوى لوحة التحكم الأساسي -->
+        <main class="admin-main">
+            <h1>لوحة التحكم الذكية والتحكم في السيستم ⚙️</h1>
+            
+            <div class="control-grid">
+                <!-- قسم التحكم في إضاءة الموقع بالكامل -->
+                <div class="control-card" id="lights">
+                    <h3>🎨 إضاءات النيون والهولوجرام</h3>
+                    <p>اختر نمط الإضاءة الأساسي للموقع ليظهر للمتابعين:</p>
+                    <button class="btn neon-red" onclick="setTheme('red')">نبيتي / أحمر سايبر</button>
+                    <button class="btn neon-blue" onclick="setTheme('blue')">أزرق مستقبلي</button>
+                    <button class="btn neon-gold" onclick="setTheme('gold')">ذهبي ملكي خالص</button>
+                </div>
+
+                <!-- قسم تشغيل وتعطيل نظام المنافسة -->
+                <div class="control-card" id="game-settings">
+                    <h3>⚡ حالة التحديات والمنافسة</h3>
+                    <p>التحكم في فتح وغلق غرف اللعب والجوائز للمنافسين:</p>
+                    <label class="switch">
+                        <input type="checkbox" id="matchToggle" checked onchange="toggleMatchmaking(this)">
+                        <span class="slider"></span> تفعيل نظام الـ Matchmaking التلقائي
+                    </label>
+                </div>
+
+                <!-- قسم إضافة الداعمين لقاعة الشرف بالكؤوس -->
+                <div class="control-card" id="supporters-manage">
+                    <h3>🏆 إدارة الأوسمة والكؤوس</h3>
+                    <p>أضف أسماء كبار الداعمين والرعاة لقاعة الشرف الملكية:</p>
+                    <input type="text" id="supporterName" placeholder="اكتب اسم الداعم الجديد هنا..." class="admin-input">
+                    <button class="btn primary-glow" onclick="addSupporter()">إضافة للوحة الشرف 👑</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/game.js"></script>
+</body>
+</html>
