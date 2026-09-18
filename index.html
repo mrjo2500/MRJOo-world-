@@ -1,21 +1,74 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>MRJOOWORLD - عالم الأسئلة التفاعلي 3D</title>
-    <meta name="description" content="صرح MRJOOWORLD الأسطوري: لعبة مسابقات وأسئلة غير محدودة بالذكاء الاصطناعي مع عوالم ثلاثية الأبعاد تفاعلية، مراحل ملكية ونجمية متقدمة." />
-    <meta property="og:title" content="MRJOOWORLD - عالم الأسئلة التفاعلي 3D" />
-    <meta property="og:description" content="صرح MRJOOWORLD الأسطوري: لعبة مسابقات وأسئلة غير محدودة بالذكاء الاصطناعي مع عوالم ثلاثية الأبعاد تفاعلية، مراحل ملكية ونجمية متقدمة." />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet">
-  </head>
-  <body class="bg-black text-white antialiased selection:bg-amber-500 selection:text-black overflow-x-hidden">
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MRJOO WORLD | Ultimate Gaming Arena</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body class="cyber-theme">
+    <div class="hologram-overlay"></div>
+    <div class="neon-glow-bg"></div>
 
+    <header class="main-header">
+        <div class="logo-container">
+            <h1 class="brand-title">MR <span class="gold-text">JOO</span></h1>
+            <span class="badge">PRO ARENA 2089</span>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html" class="active">الرئيسية</a>
+            <a href="#matchmaking">المنافسة والتحدي</a>
+            <a href="#supporters">التوب داعمين 👑</a>
+            <a href="dashboard.html" class="admin-btn">لوحة التحكم ⚙️</a>
+        </nav>
+    </header>
+
+    <main class="hero-section">
+        <div class="hero-content">
+            <div class="profile-badge-container">
+                <img src="assets/image_4.png" alt="MRJOO Profile" class="hero-avatar">
+                <div class="live-indicator">● LIVE STREAMING</div>
+            </div>
+            <h2>Reality is just another game ... and I'm the player.</h2>
+            <p>منصة المنافسات الذكية، ترفيه، تحديات 1 ضد 1، وجوائز حقيقية تحت إدارة مستر جو.</p>
+            
+            <div class="action-buttons">
+                <button class="btn primary-glow" onclick="startMatchmaking()">ابدأ التحدي الآن 🎮</button>
+                <a href="dashboard.html" class="btn secondary-glow">فتح لوحة الإدارة 🛠️</a>
+            </div>
+        </div>
+    </main>
+
+    <section id="supporters" class="supporters-section">
+        <h2>👑 قاعة الأساطير (التوب داعمين) 👑</h2>
+        <p class="section-subtitle">شكراً لرفقاء الدرب والداعمين الأوفياء</p>
+        <div class="podium-grid">
+            <div class="supporter-card gold-crown">
+                <div class="crown-icon">👑</div>
+                <div class="cup-icon">🏆</div>
+                <h3>الأسطورة الأول</h3>
+                <span class="support-amount">الدعم الأسمى</span>
+            </div>
+            <div class="supporter-card silver-crown">
+                <div class="crown-icon">👑</div>
+                <div class="cup-icon">🥈</div>
+                <h3>الداعم الذهبي</h3>
+                <span class="support-amount">شريك النجاح</span>
+            </div>
+            <div class="supporter-card bronze-crown">
+                <div class="crown-icon">👑</div>
+                <div class="cup-icon">🥉</div>
+                <h3>نجم المجتمع</h3>
+                <span class="support-amount">دعم متواصل</span>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2089 MRJOO World. All Rights Reserved. Designed with Royal Cyberpunk Style.</p>
+    </footer>
+
+    <script src="js/game.js"></script>
+</body>
+</html>
