@@ -1,0 +1,6 @@
+{
+  "name": "MRJOOWORLD - عالم الأسئلة التفاعلي 3D",
+  "description": "صرح MRJOOWORLD الأسطوري: لعبة مسابقات وأسئلة غير محدودة بالذكاء الاصطناعي مع عوالم ثلاثية الأبعاد تفاعلية، مراحل ملكية ونجمية متقدمة.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
