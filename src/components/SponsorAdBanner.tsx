@@ -1,123 +1,102 @@
-import React, { useEffect, useState } from 'react';
-import { DollarSign, ExternalLink, Settings2, Sparkles, Shield, Crown } from 'lucide-react';
-import { AdConfig, getStoredAdConfig, AdSettingsModal } from './AdSettingsModal';
-
-declare global {
-  interface Window {
-    adsbygoogle?: any[];
-  }
-}
+import React, { useState } from 'react';
 
 export const SponsorAdBanner: React.FC = () => {
-  const [adConfig, setAdConfig] = useState<AdConfig>(getStoredAdConfig());
-  const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
-  const [adLoaded, setAdLoaded] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [copiedMsg, setCopiedMsg] = useState('');
 
-  // Load Google AdSense Script dynamically when AdSense Publisher ID is present
-  useEffect(() => {
-    if (adConfig.type === 'adsense' && adConfig.adsensePublisherId) {
-      const scriptId = 'google-adsense-sdk';
-      if (!document.getElementById(scriptId)) {
-        const script = document.createElement('script');
-        script.id = scriptId;
-        script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adConfig.adsensePublisherId}`;
-        script.async = true;
-        script.crossOrigin = 'anonymous';
-        document.head.appendChild(script);
-      }
+  const phoneNumber = '01090718514';
+  const fullName = 'يوسف عبدالفتاح عبدالحق';
 
-      try {
-        // Push ad slot
-        setTimeout(() => {
-          if (window.adsbygoogle) {
-            window.adsbygoogle.push({});
-            setAdLoaded(true);
-          }
-        }, 500);
-      } catch (err) {
-        console.warn('AdSense slot init info:', err);
-      }
-    }
-  }, [adConfig.type, adConfig.adsensePublisherId, adConfig.adsenseSlotId]);
+  // نسخ رقم فودافون كاش (داخل مصر)
+  const copyVodafoneCash = () => {
+    navigator.clipboard.writeText(phoneNumber);
+    setCopiedMsg('تم نسخ رقم فودافون كاش بنجاح! 📱');
+    setTimeout(() => setCopiedMsg(''), 3000);
+  };
 
-  if (!adConfig.enabled) return null;
+  // نسخ البيانات والتحويل الدولي (خارج مصر)
+  const copyInternationalAndRedirect = () => {
+    const textToCopy = `الاسم: ${fullName}\nالرقم: ${phoneNumber}`;
+    navigator.clipboard.writeText(textToCopy);
+    setCopiedMsg('تم نسخ الاسم والرقم للتحويل الدولي! 🌍');
+    
+    setTimeout(() => {
+      setCopiedMsg('');
+      // فتح تطبيق/موقع TapTap Send
+      window.open('https://www.taptapsend.com/', '_blank');
+    }, 1500);
+  };
 
   return (
-    <>
-      <section
-        id="mr_joo_sponsored_banner"
-        aria-label="مساحة الرعاية والإعلانات"
-        className="w-full max-w-4xl mx-auto px-2 py-1 relative z-20"
+    <div className="flex justify-center my-4">
+      {/* زر Buy Me A Coffee الرئيسي */}
+      <button
+        onClick={() => setIsOpen(true)}
+        className="flex items-center gap-2 bg-gradient-to-r from-yellow-500 to-amber-600 text-black font-bold px-5 py-2.5 rounded-full shadow-lg hover:scale-105 transition-all duration-200 cursor-pointer"
       >
-        <div className="relative rounded-xl overflow-hidden bg-slate-950/80 border border-slate-800/80 shadow-[0_4px_16px_rgba(0,0,0,0.4)] transition-all hover:border-amber-500/30">
-          {/* Subtle micro sponsor marker (No admin button visible to public players) */}
-          <div className="flex items-center justify-between px-2.5 py-0.5 bg-slate-900/50 border-b border-slate-800/50 text-[9px] text-slate-400">
-            <div className="flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/80 animate-pulse"></span>
-              <span className="font-semibold text-slate-300">مساحة رعاية وإعلان • Sponsored</span>
-            </div>
-            <span className="text-[8px] text-slate-400 font-mono">MR JOO PARTNER</span>
-          </div>
+        <span className="text-xl">☕</span>
+        <span>ادعم المشروع (Buy me a coffee)</span>
+      </button>
 
-          {/* Ad Container Area */}
-          <div className="w-full min-h-[50px] sm:min-h-[64px] flex items-center justify-center p-1.5">
-            {adConfig.type === 'adsense' && adConfig.adsensePublisherId && adConfig.adsenseSlotId ? (
-              <div className="w-full text-center overflow-hidden flex items-center justify-center">
-                <ins
-                  className="adsbygoogle"
-                  style={{ display: 'inline-block', width: '100%', minHeight: '60px', maxHeight: '90px' }}
-                  data-ad-client={adConfig.adsensePublisherId}
-                  data-ad-slot={adConfig.adsenseSlotId}
-                  data-ad-format="horizontal"
-                  data-full-width-responsive="true"
-                />
+      {/* النافذة المنبثقة Modal */}
+      {isOpen && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 z-50 animate-fadeIn">
+          <div className="bg-gray-900 border border-yellow-500/40 rounded-2xl p-6 max-w-sm w-full text-white shadow-2xl relative dir-rtl text-right">
+            
+            {/* زر الإغلاق */}
+            <button
+              onClick={() => setIsOpen(false)}
+              className="absolute top-3 left-3 text-gray-400 hover:text-white text-lg font-bold w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center"
+            >
+              ✕
+            </button>
+
+            <h3 className="text-xl font-extrabold text-yellow-400 text-center mb-1">
+              ☕ دعم مشروع MRJOO
+            </h3>
+            <p className="text-xs text-gray-300 text-center mb-5">
+              اختر طريقة الدعم المناسبة لك للتسهيل عليك
+            </p>
+
+            {/* رسالة التنبيه عند النسخ */}
+            {copiedMsg && (
+              <div className="mb-4 p-2.5 bg-emerald-500/20 border border-emerald-500/50 text-emerald-300 rounded-lg text-center text-xs font-bold animate-pulse">
+                {copiedMsg}
               </div>
-            ) : (
-              /* High-End MRJOOWORLD VIP Partner Banner */
-              <a
-                href={adConfig.customTargetUrl || 'https://instagram.com'}
-                target="_blank"
-                rel="noreferrer"
-                className="w-full flex items-center justify-between gap-3 px-3 sm:px-6 py-2.5 rounded-xl bg-gradient-to-r from-amber-950/30 via-slate-900 to-black hover:from-amber-950/45 hover:via-slate-850 hover:to-slate-950 transition-all border border-amber-500/20 group text-right"
-              >
-                {/* Left side: Call to action pill */}
-                <div className="flex items-center gap-2 shrink-0">
-                  <span className="px-3 py-1.5 rounded-xl bg-amber-500/20 group-hover:bg-amber-500/30 text-amber-300 text-xs font-bold border border-amber-400/30 flex items-center gap-1 transition-all">
-                    <span>انضم الآن</span>
-                    <ExternalLink className="w-3 h-3 text-amber-400" />
-                  </span>
-                </div>
-
-                {/* Right side: Branding & Tagline */}
-                <div className="flex items-center gap-3 overflow-hidden">
-                  <div className="text-right truncate">
-                    <div className="text-xs sm:text-sm font-black text-amber-300 flex items-center gap-1.5 justify-end">
-                      <span>{adConfig.customTitle || 'MRJOOWORLD VIP Club • رعاية حصرية'}</span>
-                      <Crown className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                    </div>
-                    <p className="text-[11px] text-slate-400 hidden sm:block truncate">
-                      فرصة الرعاية الماسية داخل صرح MR JOO الأسطوري ومجتمع المعرفة
-                    </p>
-                  </div>
-
-                  <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-amber-500 to-yellow-400 p-0.5 shadow-md shrink-0 flex items-center justify-center">
-                    <div className="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
-                      <Sparkles className="w-4 h-4 text-amber-400" />
-                    </div>
-                  </div>
-                </div>
-              </a>
             )}
+
+            <div className="space-y-3">
+              {/* خيار فودافون كاش (داخل مصر) */}
+              <button
+                onClick={copyVodafoneCash}
+                className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-xl flex items-center justify-between shadow-md transition-all active:scale-95"
+              >
+                <span className="flex items-center gap-2">
+                  <span className="text-lg">📱</span>
+                  <span>فودافون كاش (داخل مصر)</span>
+                </span>
+                <span className="bg-white/20 text-xs px-2 py-1 rounded">نسخ الرقم 📋</span>
+              </button>
+
+              {/* خيار تحويل دولي (TapTap Send / تحويل خارجي) */}
+              <button
+                onClick={copyInternationalAndRedirect}
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-xl flex items-center justify-between shadow-md transition-all active:scale-95"
+              >
+                <span className="flex items-center gap-2">
+                  <span className="text-lg">🌍</span>
+                  <span>تحويل دولي (Taptap Send)</span>
+                </span>
+                <span className="bg-white/20 text-xs px-2 py-1 rounded">نسخ وتحويل 🔗</span>
+              </button>
+            </div>
+
+            <p className="text-[11px] text-gray-400 text-center mt-5">
+              * للتحويل الدولي يتم نسخ الاسم الكامل والتحويل تلقائياً لتطبيقات التحويل.
+            </p>
           </div>
         </div>
-      </section>
-
-      {/* Ad Settings Modal */}
-      <AdSettingsModal
-        isOpen={isSettingsOpen}
-        onClose={() => setIsSettingsOpen(false)}
-        onSaveConfig={(newCfg) => setAdConfig(newCfg)}
-      />
-    </>
+      )}
+    </div>
   );
 };
