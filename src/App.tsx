@@ -34,7 +34,6 @@ import { MasterShowcaseModal } from './components/MasterShowcaseModal';
 import { DailyCardModal } from './components/DailyCardModal';
 import { TranquilityFloatingButton, TranquilityModal } from './components/TranquilityModal';
 import { DAILY_ADVICE_POOL, TRANQUILITY_MESSAGES, DailyAdviceCard, TranquilityMessage } from './data/tranquilityMessages';
-import { SponsorAdBanner } from './components/SponsorAdBanner';
 import { Loader2, Sparkles, Trophy, Globe, Layers, Crown, Footprints } from 'lucide-react';
 
 const STORAGE_HISTORY_KEY = 'mr_joo_question_history_v2';
