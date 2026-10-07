@@ -44,17 +44,56 @@
                     </label>
                 </div>
 
-                <!-- قسم إضافة الداعمين لقاعة الشرف بالكؤوس -->
-                <div class="control-card" id="supporters-manage">
-                    <h3>🏆 إدارة الأوسمة والكؤوس</h3>
-                    <p>أضف أسماء كبار الداعمين والرعاة لقاعة الشرف الملكية:</p>
-                    <input type="text" id="supporterName" placeholder="اكتب اسم الداعم الجديد هنا..." class="admin-input">
-                    <button class="btn primary-glow" onclick="addSupporter()">إضافة للوحة الشرف 👑</button>
-                </div>
-            </div>
-        </main>
-    </div>
+<!-- قسم الدعم السريع المطور - Buy Me a Coffee -->
+<div style="text-align: center; margin: 20px auto; font-family: sans-serif;">
+    <button id="jooCoffeeBtn" style="background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2); padding: 10px 20px; border-radius: 30px; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; color: #fff; font-size: 1.1rem; font-weight: bold; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+        <span>Buy Me a Coffee</span>
+        <!-- استيكر بوبو ودودو المشهور -->
+        <img src="https://tenor.com" alt="Bobo Dudu" style="width: 35px; height: 35px; object-fit: contain;">
+    </button>
+    <!-- رسالة التأكيد المخفية تماماً والتي تظهر فقط بعد الضغط -->
+    <div id="jooToast" style="display: none; background: #2ecc71; color: #fff; padding: 12px; border-radius: 8px; margin-top: 15px; max-width: 320px; margin-left: auto; margin-right: auto; font-size: 0.9rem; line-height: 1.4; border: 1px solid #27ae60;"></div>
+</div>
 
-    <script src="js/game.js"></script>
-</body>
+<script>
+document.getElementById('jooCoffeeBtn').addEventListener('click', function() {
+    const num = "01090718514";
+    const name = "Youssef Abdelfattah Abdelhak";
+    const textToCopy = "Name: " + name + "\nVodafone Cash: " + num;
+    
+    // نسخ البيانات المخفية فوراً إلى الحافظة
+    navigator.clipboard.writeText(textToCopy).then(function() {
+        showSuccess(name, num);
+    }).catch(function() {
+        // طريقة بديلة وآمنة في حال المتصفحات المقيدة
+        const temp = document.createElement("textarea");
+        temp.value = textToCopy;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand("copy");
+        document.body.removeChild(temp);
+        showSuccess(name, num);
+    });
+});
+
+function showSuccess(name, num) {
+    const toast = document.getElementById('jooToast');
+    // إظهار الاسم والرقم فقط لمن ضغط وأراد الإرسال بالفعل
+    toast.innerHTML = "<b>✓ Copied to clipboard!</b><br>Name: " + name + "<br>Number: " + num + "<br><small>Redirecting to complete payment...</small>";
+    toast.style.display = 'block';
+    
+    // فحص ذكي للمستخدم لو خارج مصر يتم توجيهه لبوابة دولية تدعم فودافون كاش بالاسم والرقم
+    setTimeout(function() {
+        const userLang = navigator.language || navigator.userLanguage;
+        if (!userLang.includes("ar") && !userLang.includes("eg")) {
+            // توجيه المستخدم الدولي لمنصة كاش دولية
+            window.location.href = "https://sendwave.com";
+        } else {
+            // توجيه المستخدم المحلي لرابط المحفظة المباشر
+            window.location.href = "https://vf.eg";
+        }
+    }, 2500);
+}
+</script>
+
 </html>
